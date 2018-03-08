@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--setttings是 MyBatis 中极为重要的调整设置，它们会改变 MyBatis 的运行时行为。-->
+    <!--logImpl:指定 MyBatis 所用日志的具体实现，未指定时将自动查找。-->
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+
+    <!--typeAliases:类型别名是为 Java 类型设置一个短的名字。它只和 XML 配置有关，存在的意义仅在于用来减少类完全限定名的冗余。-->
+    <typeAliases>
+        <!--指定一个包名，MyBatis 会在包名下面搜索需要的 Java Bean-->
+        <package name="com.ssmblog.core.entity"/>
+    </typeAliases>
+
+
+</configuration>
