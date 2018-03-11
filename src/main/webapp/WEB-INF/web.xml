@@ -15,7 +15,7 @@
   </context-param>  
   
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   
   <filter>
@@ -75,12 +75,12 @@
     <init-param>
       <!-- 用户名 -->
       <param-name>loginUsername</param-name>
-      <param-value>yourname</param-value>
+      <param-value>druid</param-value>
     </init-param>
     <init-param>
       <!-- 密码 -->
       <param-name>loginPassword</param-name>
-      <param-value>yourpassword</param-value>
+      <param-value>123456</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>
