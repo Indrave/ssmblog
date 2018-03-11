@@ -1,4 +1,4 @@
-package com.ssmblog.core.dao;
+package com.ssmblog.core.service;
 
 import com.ssmblog.core.entity.User;
 
@@ -7,51 +7,46 @@ import java.util.Map;
 
 /**
  * @author wangyj
- * @date 2018/3/10
+ * @date 2018/3/11
  * @description
  */
-public interface UserDao {
+public interface UserService {
 
     /**
-     * 登录
+     *
      * @param user
      * @return
      */
     public User login(User user);
 
+
     /**
-     * 查找用户列表
      * @param map
      * @return
      */
-    public List<User> findUsers(Map<String, Object> map);
+    public List<User> findUser(Map<String, Object> map);
 
     /**
-     * 获取所有用户数
      * @param map
      * @return
      */
-    public Long getToalUser(Map<String,Object> map);
+    public Long getTotalUser(Map<String, Object> map);
 
     /**
-     * 更新用户信息
      * @param user
      * @return
      */
     public int updateUser(User user);
 
     /**
-     * 新增用户
      * @param user
      * @return
      */
     public int addUser(User user);
 
     /**
-     * 删除用户
      * @param id
      * @return
      */
     public int deleteUser(Integer id);
-
 }
