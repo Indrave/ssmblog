@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * @author wangyj
- * @date 2018/3/11
+ * @DATE 2018/3/11
  * @description 用户注册
  */
 @Controller
