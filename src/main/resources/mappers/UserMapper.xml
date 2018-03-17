@@ -14,7 +14,7 @@
     <!--此处添加limit 1用于优化查询效率-->
     <select id="login" parameterType="User" resultMap="UserResult">
         select id,user_name,password,role_name from ssm_user
-        where user_name=#{userNmae} and password=#{password} limit 1
+        where user_name=#{userName} and password=#{password} limit 1
     </select>
 
     <select id="findUsers" parameterType="Map" resultMap="UserResult">
@@ -29,7 +29,7 @@
         </if>
     </select>
 
-    <select id="getTotalUser" parameterType="Map" resultMap="Long">
+    <select id="getTotalUser" parameterType="Map" resultType="Long">
         select count(*) from ssm_user
         <where>
             <if test="userName!=null and userName!=''">
