@@ -3,6 +3,7 @@ package com.ssmblog.core.service.impl;
 import com.ssmblog.core.dao.UserDao;
 import com.ssmblog.core.entity.User;
 import com.ssmblog.core.service.UserService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Map;
  * @date 2018/3/11
  * @description
  */
+@Service("userService")
 public class UserServiceImpl implements UserService {
 
     @Resource
