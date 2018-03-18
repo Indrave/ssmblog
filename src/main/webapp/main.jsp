@@ -32,7 +32,7 @@
             });
         }
 
-        function openTab(url,text,iconCls){
+        function openTab(text,url,iconCls){
             //如果tab已经打开
             if($('#tabs').tabs('exists',text)){
                 $("#tabs").tabs("close", text);
@@ -94,34 +94,41 @@
     </div>
     <div region="west" style="width: 200px;height:500px;" title="导航菜单" split="true">
         <div class="easyui-accordion">
-            <div title="文章管理" data-options="selected:true;iconCls:'icon-wenzhangs'" style="padding: 10px;height:10px;">
-                <a href="javascript:openTab(' 文章管理','articleManage.jsp','icon-wenzhang')"
+            <div title="文章管理"
+                 data-options="selected:true,iconCls:'icon-wenzhangs'"
+                 style="padding: 10px;height:10px;">
+                <a
+                        href="javascript:openTab(' 文章管理','articleManage.jsp','icon-wenzhang')"
                         class="easyui-linkbutton"
                         data-options="plain:true,iconCls:'icon-wenzhang'"
                         style="width: 150px;"> 文章管理</a>
             </div>
-            <div title="图片管理" data-options="iconCls:'icon-shouye'" style="padding:10px">
-                <a href="javascript:openTab(' 图片设置','pictureManage.jsp?type=1&grade=1','icon-tupians')"
+            <div title="图片管理" data-options="iconCls:'icon-shouye'"
+                 style="padding:10px">
+                <a
+                        href="javascript:openTab(' 图片设置','pictureManage.jsp?type=1&grade=1','icon-tupians')"
                         class="easyui-linkbutton"
                         data-options="plain:true,iconCls:'icon-tupian'"
-                        style="width: 150px;"> 图片设置
-                </a>
+                        style="width: 150px;"> 图片设置</a>
             </div>
-            <div title="书籍管理" data-options="iconCls:'icon-shuji'" style="padding:10px">
-                <a href="javascript:openTab(' 全部书籍','allBooksManage.jsp','icon-shuben')"
+            <div title="书籍管理" data-options="iconCls:'icon-shuji'"
+                 style="padding:10px">
+                <a
+                        href="javascript:openTab(' 全部书籍','allBooksManage.jsp','icon-shuben')"
                         class="easyui-linkbutton"
                         data-options="plain:true,iconCls:'icon-shuben'"
-                        style="width: 150px;">全部书籍
-                </a>
+                        style="width: 150px;">全部书籍</a>
             </div>
-            <div title="系统管理" data-options="iconCls:'icon-item'" style="padding:10px;border:none;">
-                <a href="javascript:openTab(' 管理员列表','userManage.jsp','icon-lxr')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-lxr'" style="width: 150px;">
-                    管理员列表
-                </a>
-                <a href="javascript:logout()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'" style="width: 150px;">
-                     安全退出
-                </a>
-
+            <div title="系统管理" data-options="iconCls:'icon-item'"
+                 style="padding:10px;border:none;">
+                <a href="javascript:openTab(' 管理员列表','userManage.jsp','icon-lxr')"
+                   class="easyui-linkbutton"
+                   data-options="plain:true,iconCls:'icon-lxr'" style="width: 150px;">
+                    管理员列表</a><a href="javascript:logout()"
+                                class="easyui-linkbutton"
+                                data-options="plain:true,iconCls:'icon-exit'"
+                                style="width: 150px;">
+                安全退出</a>
             </div>
         </div>
     </div>
