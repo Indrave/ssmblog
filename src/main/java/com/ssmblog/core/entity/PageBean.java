@@ -11,9 +11,15 @@ public class PageBean {
     private int page;
 
     //每页数量
-    private int rows;
+    private int pageSize;
 
     private int start;
+
+    public PageBean(int page, int pageSize) {
+        super();
+        this.page = page;
+        this.pageSize = pageSize;
+    }
 
     public int getPage() {
         return page;
@@ -23,16 +29,16 @@ public class PageBean {
         this.page = page;
     }
 
-    public int getRows() {
-        return rows;
+    public int getPageSize() {
+        return pageSize;
     }
 
-    public void setRows(int rows) {
-        this.rows = rows;
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
     public int getStart() {
-        return start;
+        return (page - 1) * pageSize;
     }
 
     public void setStart(int start) {
