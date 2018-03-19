@@ -33,7 +33,7 @@ public interface UserDao {
      * @param map
      * @return
      */
-    public Long getToalUser(Map<String,Object> map);
+    public Long getTotalUser(Map<String,Object> map);
 
     /**
      * 更新用户信息

@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long getTotalUser(Map<String, Object> map) {
-        return userDao.getToalUser(map);
+        return userDao.getTotalUser(map);
     }
 
     @Override

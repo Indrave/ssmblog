@@ -1,16 +1,27 @@
 package com.ssmblog.core.admin;
 
+import com.ssmblog.core.entity.PageBean;
 import com.ssmblog.core.entity.User;
 import com.ssmblog.core.service.UserService;
 import com.ssmblog.core.util.MD5Util;
+import com.ssmblog.core.util.ResponseUtil;
+import com.ssmblog.core.util.StringUtil;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 import org.apache.log4j.MDC;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author wangyj
@@ -55,6 +66,27 @@ public class UserController {
             MDC.put("userName", user.getUserName());
             return "redirect:/main.jsp";
         }
+    }
+
+    @RequestMapping("/list")
+    public String list(@RequestParam(value = "page", required = false) String page, @RequestParam(value = "rows") String rows,
+                       User s_user, HttpServletResponse response) throws IOException {
+        Map<String, Object> map = new HashMap<>();
+        if (page != null && rows != null) {
+            PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
+            map.put("start", pageBean.getStart());
+            map.put("size", pageBean.getPageSize());
+        }
+        map.put("userName", StringUtil.formatLike(s_user.getUserName()));
+        List<User> userList = userService.findUser(map);
+        Long total = userService.getTotalUser(map);
+        JSONObject result = new JSONObject();
+        JSONArray jsonArray = JSONArray.fromObject(userList);
+        result.put("rows", jsonArray);
+        result.put("total", total);
+        log.info("request:user/list,map:" + map.toString());
+        ResponseUtil.write(response,result);
+        return null;
     }
 
 
