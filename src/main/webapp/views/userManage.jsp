@@ -38,9 +38,9 @@
            url="${pageContext.request.contextPath}/user/list.do" fit="true" toolbar="#tb">
         <thead>
             <tr>
-                <td field="cb" checkbox="true" align="center"></td>
-                <td field="id" width="50" align="center">编号</td>
-                <td fild="userName" width="100" align="center"></td>
+                <th field="cb" checkbox="true" align="center"></th>
+                <th field="id" width="50" align="center">编号</th>
+                <th field="userName" width="100" align="center">用户名</th>
             </tr>
         </thead>
     </table>

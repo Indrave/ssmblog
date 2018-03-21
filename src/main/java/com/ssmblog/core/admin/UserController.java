@@ -89,5 +89,28 @@ public class UserController {
         return null;
     }
 
+    /**
+     * 修改密码
+     * @param user 用户
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping("/modifyPassword")
+    public String modifyPassword(User user,HttpServletResponse response) throws IOException {
+        String MD5pwd = MD5Util.MD5Encode(user.getPassword(), "UTF-8");
+        user.setPassword(MD5pwd);
+        int resultToal = userService.updateUser(user);
+        JSONObject result = new JSONObject();
+        if(resultToal>0){
+            result.put("success", true);
+        }else{
+            result.put("success", false);
+        }
+        log.info("request:user/modifyPassword,user:"+user.getUserName());
+        ResponseUtil.write(response,result);
+        return null;
+    }
+
 
 }
