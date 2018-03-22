@@ -83,7 +83,7 @@
             }
             var ids = strIds.join(",");
             $.messager.confirm("系统提示","您确认要删除这<font color=red>"
-                + selectedRows.length + "</font>条数据吗？",function (r) {
+                + selectRows.length + "</font>条数据吗？",function (r) {
                 if(r){
                     $.post("${pageContext.request.contextPath}/user/delete.do",{
                         ids:ids
@@ -100,7 +100,13 @@
 
 
         }
-
+        
+        //新增用户
+        function openUserAddDialog() {
+            $('#dlg').dialog("open").dialog("setTitle","添加用户信息");
+            url = "${pageContext.request.contextPath}/user/save.do";
+        }
+        
 
     </script>
 </head>
