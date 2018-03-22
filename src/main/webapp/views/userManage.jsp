@@ -88,13 +88,14 @@
                     $.post("${pageContext.request.contextPath}/user/delete.do",{
                         ids:ids
                     },function (result) {
+                        debugger;
                         if(result.success){
                             $.messager.alert("系统提示", "数据已成功删除！");
                             $("#dg").datagrid("reload");
                         }else{
                             $.messager.alert("系统提示", "数据删除失败！");
                         }
-                    });
+                    },"json");
                 }
             });
 
