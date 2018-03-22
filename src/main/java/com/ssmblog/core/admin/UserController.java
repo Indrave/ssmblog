@@ -73,7 +73,7 @@ public class UserController {
                        User s_user, HttpServletResponse response) throws IOException {
         Map<String, Object> map = new HashMap<>();
         if (page != null && rows != null) {
-            PageBean pageBean = new PageBean(Integer.parseInt(page),Integer.parseInt(rows));
+            PageBean pageBean = new PageBean(Integer.parseInt(page), Integer.parseInt(rows));
             map.put("start", pageBean.getStart());
             map.put("size", pageBean.getPageSize());
         }
@@ -85,32 +85,82 @@ public class UserController {
         result.put("rows", jsonArray);
         result.put("total", total);
         log.info("request:user/list,map:" + map.toString());
-        ResponseUtil.write(response,result);
+        ResponseUtil.write(response, result);
         return null;
     }
 
     /**
      * 修改密码
-     * @param user 用户
+     *
+     * @param user     用户
      * @param response
      * @return
      * @throws IOException
      */
     @RequestMapping("/modifyPassword")
-    public String modifyPassword(User user,HttpServletResponse response) throws IOException {
+    public String modifyPassword(User user, HttpServletResponse response) throws IOException {
         String MD5pwd = MD5Util.MD5Encode(user.getPassword(), "UTF-8");
         user.setPassword(MD5pwd);
         int resultToal = userService.updateUser(user);
         JSONObject result = new JSONObject();
-        if(resultToal>0){
+        if (resultToal > 0) {
             result.put("success", true);
-        }else{
+        } else {
             result.put("success", false);
         }
-        log.info("request:user/modifyPassword,user:"+user.getUserName());
-        ResponseUtil.write(response,result);
+        log.info("request:user/modifyPassword,user:" + user.getUserName());
+        ResponseUtil.write(response, result);
         return null;
     }
 
+    /**
+     * 添加或修改管理员
+     *
+     * @param user
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping("/save")
+    public String save(User user, HttpServletResponse response) throws IOException {
+        int resultTotal = 0;
+        String MD5Pwd = MD5Util.MD5Encode(user.getPassword(), "UTF-8");
+        user.setPassword(MD5Pwd);
+        if (user.getId() == null) {
+            resultTotal = userService.addUser(user);
+        } else {
+            resultTotal = userService.updateUser(user);
+        }
+        JSONObject result = new JSONObject();
+        if (resultTotal == 1) {
+            result.put("success", true);
+        } else {
+            result.put("success", false);
+        }
+        log.info("request:user/save,user:" + user.getUserName());
+        ResponseUtil.write(response, result);
+        return null;
+    }
+
+    /**
+     * 删除用户
+     *
+     * @param ids
+     * @param response
+     * @return
+     */
+    @RequestMapping("/delete")
+    public String delete(@RequestParam(value = "ids") String ids, HttpServletResponse response) throws IOException {
+        int resultTotal = 0;
+        String[] id = ids.split(",");
+        for (int i = 0; i < id.length; i++) {
+            userService.deleteUser(Integer.parseInt(id[i]));
+        }
+        JSONObject result = new JSONObject();
+        result.put("success", true);
+        log.info("request:/user/delete,ids:"+ids);
+        ResponseUtil.write(response,result);
+        return null;
+    }
 
 }
