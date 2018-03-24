@@ -163,4 +163,17 @@ public class UserController {
         return null;
     }
 
+    /**
+     * 登出用户
+     * @param httpSession
+     * @return
+     */
+    @RequestMapping("logout")
+    public String logout(HttpSession httpSession){
+        httpSession.invalidate();
+        log.info("request:/user/logout");
+        return "redirect:login.jsp";
+    }
+
+
 }
