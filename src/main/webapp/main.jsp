@@ -124,7 +124,8 @@
                 <a href="javascript:openTab(' 管理员列表','userManage.jsp','icon-lxr')"
                    class="easyui-linkbutton"
                    data-options="plain:true,iconCls:'icon-lxr'" style="width: 150px;">
-                    管理员列表</a><a href="javascript:logout()"
+                    管理员列表</a>
+                <a href="javascript:logout()"
                                 class="easyui-linkbutton"
                                 data-options="plain:true,iconCls:'icon-exit'"
                                 style="width: 150px;">
