@@ -36,7 +36,7 @@ public interface PictureDao {
      * @param picture
      * @return
      */
-    public int insertPicture(Picture picture);
+    public int addPicture(Picture picture);
 
     /**
      * 修改图片

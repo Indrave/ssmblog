@@ -53,11 +53,11 @@
         insert into ssm_picture (path,type,time,url,grade) VALUES (#{path},#{type},#{time},#{url},#{grade})
     </insert>
 
-    <update id="updatePicture" parameterType="Picture">
+    <update id="updPicture" parameterType="Picture">
         update ssm_picture set path=#{path},type=#{type},time=#{time},url={#url},grade=#{grade} where id=#{id}
     </update>
 
-    <delete id="deletePicture" parameterType="String">
+    <delete id="delPicture" parameterType="String">
         delete from ssm_picture where id=#{id}
     </delete>
 
