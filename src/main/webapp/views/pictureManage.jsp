@@ -144,7 +144,24 @@
             'sizeLimit': 2048000,						//上传文件的大小限制
             'buttonText': '上传图片',						//浏览按钮的文本，默认值：BROWSE
             'displayData': 'percentage',     			//上传队列显示的数据类型，percentage是百分比，speed是上传速度
-
+            //回调函数
+            'onComplete':function (evt, queueID, fileObj, response, data) {
+                $("#img11").attr("src", "../" + response);
+                $("#input11").val(response);
+                $("#pic11").removeAttr("style");
+                $("#img11").removeAttr("style");
+                return false;
+            }
+            'onError': function (event, queueID, fileObj, errorObj) {
+                if (errorObj.type === "File Size") {
+                    alert("文件最大为3M");
+                    $("#uploadify").uploadifyClearQueue();
+                }
+            },
+            'onQueueFull': function (event, queueSizeLimit) {
+                alert("最多上传" + queueSizeLimit + "张图片");
+                return false;
+            }
         });
     }
 
