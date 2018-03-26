@@ -32,6 +32,7 @@ public class LoadImageController {
      * @return
      * @throws IOException
      */
+    @RequestMapping("/upload")
     public String upload(HttpServletRequest request, HttpServletResponse response, @RequestParam("file")MultipartFile file) throws IOException {
         ServletContext servletContext = request.getSession().getServletContext();
         String dir = servletContext.getRealPath("/upload");
