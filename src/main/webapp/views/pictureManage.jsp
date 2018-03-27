@@ -105,12 +105,78 @@
 
     var url;
 
-    function formatProPic() {
-        return "<img width=100 height=100 src='${pageContext.request.contextPath}/" + val + "'>";
+    //查询图片
+    function searchPicture(){
+        $('#dg').datagrid('load',{
+            "url":$('#url').val()
+        })
+    }
+
+    //  删除图片
+    function deletePicture(){
+        var selectedRows = $('#dg').datagrid('getSelections');
+        if(selectedRows.length==0){
+            $.messager.alert("系统提示", "请选择要删除的数据");
+            return;
+        }
+        var strIds = [];
+        for (var i = 0; i < selectedRows.length; i++) {
+            strIds.push(selectedRows[i].id);
+        }
+        var ids = strIds.join(",");
+        $.messager.confirm("系统提示","您确认要删除<font color=red>"+selectedRows.length+"</font>条数据吗",function (r) {
+            if(r){
+                $.post("${pageContext.request.contextPath}/picture/delete.do",
+                    {
+                        ids: ids
+                    }, function (result) {
+                        if (result.success) {
+                            $.messager.alert("系统提示", "数据已成功删除！");
+                            $("#dg").datagrid("reload");
+                        } else {
+                            $.messager.alert("系统提示", "数据删除失败！");
+                        }
+                    }, "json");
+            }
+        });
+
     }
 
     function openPictureAddDialog() {
-        $("#dlg").dialog("open").dialog("settitle", "添加图片");
+        $("#dlg").dialog("open").dialog("setTitle", "添加图片");
+        var html = '<img name="uploadify2" id="uploadify2"  type="file" />';
+        $('#picture').append(html);
+        var imghtml = '<img src="images/back.jpg" width="110" height="110" id="img11"  style="display:none;"/><input type="text" id="input11" name="path" value="" style="display:none;" />';
+        $('#pic11').append(imghtml);
+        initUploadify();
+        url = "${pageContext.request.contextPath}/picture/save.do";
+    }
+
+
+    function savePicture() {
+        $("#fm").form("submit", {
+            url: url,
+            onSubmit: function () {
+                return $(this).form("validate");
+            },
+            success: function (result) {
+                if (result.success) {
+                    $.messager.alert("系统提示", "保存成功");
+                    $("#dlg").dialog("close");
+                    $("#dg").datagrid("reload");
+                    resetValue();
+                } else {
+                    $.messager.alert("系统提示", "保存失败");
+                    window.location.reload();
+                    return;
+                }
+            }
+        });
+    }
+
+
+    function formatProPic(val,row) {
+        return "<img width=100 height=100 src='${pageContext.request.contextPath}/" + val + "'>";
     }
 
     function openPictureModifyDialog() {
@@ -166,7 +232,7 @@
                 $("#pic11").removeAttr("style");
                 $("#img11").removeAttr("style");
                 return false;
-            }
+            },
             'onError': function (event, queueID, fileObj, errorObj) {
                 if (errorObj.type === "File Size") {
                     alert("文件最大为3M");
