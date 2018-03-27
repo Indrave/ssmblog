@@ -124,8 +124,10 @@
             $.messager.alert("系统提示", "请选择一条要编辑的数据");
         }
         initUploadify();
-
-
+        $("#dlg").dialog("open").dialog("setTitle", "修改信息");
+        $('#fm').form('load', row);
+        url = "${pageContext.request.contextPath}/picture/save.do?id="
+            + row.id;
     }
 
     function resetValue() {
