@@ -128,6 +128,19 @@
 
     }
 
+    function resetValue() {
+        $("#desc").val("");
+        $("#path").val("");
+        $('#picture').find('img').remove();
+        $('#pic11').find('input').remove();
+        $('#pic11').find('img').remove();
+    }
+
+    function closePictureDialog() {
+        $("#dlg").dialog("close");
+        resetValue();
+    }
+
     function initUploadify() {
         $("#uploadify2").uploadify({
             'uploader': 'swf/uploadify2.swf', 			//flash文件的相对路径
