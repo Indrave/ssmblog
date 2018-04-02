@@ -13,7 +13,7 @@
         <result property="grade" column="grade"/>
     </resultMap>
 
-    <select id="findPictures" parameterType="Map">
+    <select id="findPictures" parameterType="Map" resultMap="PictureResult">
         select id,path,type,time,url,grade from ssm_picture
         <where>
             <if test="url!=null and url!=''">

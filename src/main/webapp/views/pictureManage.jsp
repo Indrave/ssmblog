@@ -53,7 +53,7 @@
 
 <div id="tb">
     <div>
-        <a iconCls="icon-add" class="easyui-linkbutton" plain="true" onclick="openPictureModifyDialog()">添加</a>
+        <a iconCls="icon-add" class="easyui-linkbutton" plain="true" onclick="openPictureAddDialog()">添加</a>
         <a iconCls="icon-edit" class="easyui-linkbutton" plain="true" onclick="openPictureModifyDialog()">修改</a>
         <a iconCls="icon-remove" class="easyui-linkbutton" plain="true" onclick="deletePicture()">删除</a>
     </div>
@@ -139,7 +139,6 @@
                     }, "json");
             }
         });
-
     }
 
     function openPictureAddDialog() {
