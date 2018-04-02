@@ -61,5 +61,23 @@ public class PictureController {
         return null;
     }
 
+    /**
+     *删除图片
+     * @param ids
+     * @param response
+     * @return
+     */
+    @RequestMapping("/delete")
+    public String delete(@RequestParam(value = "ids") String ids,HttpServletResponse response) throws IOException {
+        JSONObject result = new JSONObject();
+        String[] idsStr = ids.split(",");
+        for (String id: idsStr) {
+            pictureService.deletePicture(id);
+        }
+        result.put("success", true);
+        log.info("request:picture/delete,ids:" + ids);
+        ResponseUtil.write(response, result);
+        return null;
+    }
 
 }
