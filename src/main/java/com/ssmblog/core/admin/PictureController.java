@@ -3,6 +3,7 @@ package com.ssmblog.core.admin;
 import com.ssmblog.core.entity.PageBean;
 import com.ssmblog.core.entity.Picture;
 import com.ssmblog.core.service.PictureService;
+import com.ssmblog.core.util.DateUtil;
 import com.ssmblog.core.util.ResponseUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -77,6 +78,52 @@ public class PictureController {
         result.put("success", true);
         log.info("request:picture/delete,ids:" + ids);
         ResponseUtil.write(response, result);
+        return null;
+    }
+
+
+    /**
+     * 新增或更新图片
+     * @param picture
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping("/save")
+    public String save(Picture picture,HttpServletResponse response) throws IOException {
+        int resultTotal = 0;
+        if(picture.getId()==null){
+            picture.setTime(DateUtil.getCurrentDateStr());
+            pictureService.addPicture(picture);
+        }else{
+            System.out.println(picture.getPath());
+            resultTotal = pictureService.updatePicture(picture);
+        }
+        JSONObject result = new JSONObject();
+        if (resultTotal > 0) {
+            result.put("success", true);
+        } else {
+            result.put("success", false);
+        }
+        log.info("request: picture/save ,  " + picture.toString());
+        ResponseUtil.write(response, result);
+        return null;
+    }
+
+    /**
+     * 根据id查找图片
+     * @param id
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/findById")
+    public String findById(@RequestParam(value = "id") String id,
+                           HttpServletResponse response) throws Exception {
+        Picture picture = pictureService.findPictureById(id);
+        JSONObject jsonObject = JSONObject.fromObject(picture);
+        log.info("request: picture/findById");
+        ResponseUtil.write(response, jsonObject);
         return null;
     }
 
