@@ -1,0 +1,61 @@
+package com.ssmblog.core.dao;
+
+import com.ssmblog.core.entity.Article;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @author wangyj
+ * @date 2018/4/16
+ * @description
+ */
+public interface ArticleDao {
+
+    /**
+     * 返回相应的数据集合
+     *
+     * @param map
+     * @return
+     */
+    public List<Article> findArticles(Map<String, Object> map);
+
+    /**
+     * 数据数目
+     *
+     * @param map
+     * @return
+     */
+    public Long getTotalArticles(Map<String, Object> map);
+
+    /**
+     * 添加文章
+     *
+     * @return
+     */
+    public int insertArticle(Article article);
+
+    /**
+     * 修改文章
+     *
+     * @return
+     */
+    public int updArticle(Article article);
+
+    /**
+     * 删除
+     *
+     * @param id
+     * @return
+     */
+    public int delArticle(String id);
+
+    /**
+     * 根据id查找
+     *
+     * @param id
+     * @return
+     */
+    public Article getArticleById(String id);
+
+}
