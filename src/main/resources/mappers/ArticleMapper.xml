@@ -26,5 +26,14 @@
         </if>
     </select>
 
+    <select id="getTotalArticles" parameterType="Map" resultType="Long">
+        select count(*) from ssm_article
+        <where>
+            <if test="articleTitle!=null and articleTitle!='' ">
+                and article_title like #{articleTitle}
+            </if>
+        </where>
+    </select>
+
 
 </mapper>
