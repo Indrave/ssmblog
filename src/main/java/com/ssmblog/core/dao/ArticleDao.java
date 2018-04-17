@@ -1,6 +1,7 @@
 package com.ssmblog.core.dao;
 
 import com.ssmblog.core.entity.Article;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import java.util.Map;
  * @date 2018/4/16
  * @description
  */
+@Repository
 public interface ArticleDao {
 
     /**
