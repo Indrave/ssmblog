@@ -3,8 +3,9 @@ package com.ssmblog.core.service.impl;
 import com.ssmblog.core.dao.ArticleDao;
 import com.ssmblog.core.entity.Article;
 import com.ssmblog.core.service.ArticleService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -13,9 +14,10 @@ import java.util.Map;
  * @date 2018/4/17
  * @description
  */
+@Service("articleService")
 public class ArticleServiceImpl implements ArticleService {
 
-    @Autowired
+    @Resource
     private ArticleDao articleDao;
 
     @Override
@@ -30,11 +32,17 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public int addArticle(Article article) {
+        if (article.getArticleTitle() == null || article.getArticleContent() == null || getTotalArticle(null) > 90 || article.getArticleContent().length() > 50000) {
+            return 0;
+        }
         return articleDao.insertArticle(article);
     }
 
     @Override
     public int updateArticle(Article article) {
+        if (article.getArticleTitle() == null || article.getArticleContent() == null || getTotalArticle(null) > 90 || article.getArticleContent().length() > 50000) {
+            return 0;
+        }
         return articleDao.updArticle(article);
     }
 
