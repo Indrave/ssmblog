@@ -105,6 +105,7 @@ public class ArticleController {
      * @param response
      * @return
      */
+    @RequestMapping("/delete")
     public String delete(@RequestParam(value = "ids") String ids,HttpServletResponse response) throws IOException {
         JSONObject result = new JSONObject();
         String[] idArray = ids.split(",");
@@ -115,6 +116,21 @@ public class ArticleController {
         result.put("success", true);
         ResponseUtil.write(response, result);
         log.info("request:article/delete,ids:" + ids);
+        return null;
+    }
+
+    /**
+     * 根据id查找
+     * @param id
+     * @param response
+     * @return
+     */
+    @RequestMapping("/findById")
+    public String findById(@RequestParam(value = "id") String id, HttpServletResponse response) throws IOException {
+        Article article = articleService.findById(id);
+        JSONObject result = JSONObject.fromObject(article);
+        ResponseUtil.write(response,result);
+        log.info("request:article/findById+id"+id);
         return null;
     }
 
