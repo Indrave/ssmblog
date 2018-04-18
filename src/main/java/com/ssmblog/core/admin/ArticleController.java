@@ -99,5 +99,24 @@ public class ArticleController {
         return null;
     }
 
+    /**
+     * 删除文章
+     * @param ids
+     * @param response
+     * @return
+     */
+    public String delete(@RequestParam(value = "ids") String ids,HttpServletResponse response) throws IOException {
+        JSONObject result = new JSONObject();
+        String[] idArray = ids.split(",");
+        for (String id: idArray
+             ) {
+            articleService.deleteArticle(id);
+        }
+        result.put("success", true);
+        ResponseUtil.write(response, result);
+        log.info("request:article/delete,ids:" + ids);
+        return null;
+    }
+
 
 }
