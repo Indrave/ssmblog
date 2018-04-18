@@ -3,6 +3,7 @@ package com.ssmblog.core.admin;
 import com.ssmblog.core.entity.Article;
 import com.ssmblog.core.entity.PageBean;
 import com.ssmblog.core.service.ArticleService;
+import com.ssmblog.core.util.DateUtil;
 import com.ssmblog.core.util.ResponseUtil;
 import com.ssmblog.core.util.StringUtil;
 import net.sf.json.JSONArray;
@@ -38,6 +39,7 @@ public class ArticleController {
 
     /**
      * 查询文章
+     *
      * @param page
      * @param rows
      * @param article
@@ -45,6 +47,7 @@ public class ArticleController {
      * @return
      * @throws IOException
      */
+    @RequestMapping("/list")
     public String list(
             @RequestParam(value = "page", required = false) String page,
             @RequestParam(value = "rows", required = false) String rows,
@@ -64,8 +67,35 @@ public class ArticleController {
         JSONArray jsonArray = JSONArray.fromObject(articleList);
         result.put("rows", jsonArray);
         result.put("total", total);
+        ResponseUtil.write(response, result);
+        log.info("request:article/list,map:" + map.toString());
+        return null;
+    }
+
+    /**
+     * 保存或修改文章
+     * @param article
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping("/save")
+    public String save(Article article, HttpServletResponse response) throws IOException {
+        int resultTotal = 0;
+        if (article.getId() == null) {
+            article.setArticleCreateDate(DateUtil.getCurrentDateStr());
+            resultTotal = articleService.addArticle(article);
+        } else {
+            resultTotal = articleService.updateArticle(article);
+        }
+        JSONObject result = new JSONObject();
+        if(resultTotal>0){
+            result.put("success", true);
+        }else {
+            result.put("success", false);
+        }
         ResponseUtil.write(response,result);
-        log.info("request:article/list,map:"+map.toString());
+        log.info("request:article/save,article:"+article.toString());
         return null;
     }
 
