@@ -56,5 +56,40 @@
         </div>
     </div>
 
+    <div id="dlg" class="easyui-dialog"
+         style="width: 850px;height:555px;padding: 10px 20px; position: relative; z-index:1000;"
+         closed="true" buttons="#dlg-buttons">
+        <form id="fm" method="post">
+            <table cellspacing="8px">
+                <tr>
+                    <td>标题：</td>
+                    <td><input type="text" id="title" name="articleTitle"
+                               class="easyui-validatebox" required="true"/>&nbsp;<font
+                            color="red">*</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td>添加人：</td>
+                    <td><input type="text" id="addName" name="addName"/>
+                        <input type="text" id="articleCreateDate" name="articleCreateDate" type="hidden"
+                               style="display:none;"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>详细内容</td>
+                    <td id="editor">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div id="dlg-buttons">
+        <a href="javascript:saveArticle()" class="easyui-linkbutton"
+           iconCls="icon-ok">保存</a> <a href="javascript:closeArticleDialog()"
+                                       class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+    </div>
+
+
 </body>
 </html>
